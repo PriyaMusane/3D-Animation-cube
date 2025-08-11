@@ -1,0 +1,97 @@
+:root{
+  --bg:#0f1724;
+  --card:#0ea5a4;
+  --card-dark:#07585a;
+  --glass: rgba(255,255,255,0.06);
+  --text: #e6f7f7;
+  --accent: #ffd166;
+  --size: 320px;
+  --perspective: 1000px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  display:grid;
+  place-items:center;
+  background:linear-gradient(180deg,#02121a 0%, #052633 100%);
+  color:var(--text);
+  padding:40px;
+}
+
+/* container gives perspective */
+.card-wrap{
+  width:var(--size);
+  height:420px;
+  perspective: var(--perspective);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* the 3D card */
+.card{
+  width:100%;
+  height:100%;
+  border-radius:18px;
+  transform-style:preserve-3d;
+  transition: transform 300ms cubic-bezier(.2,.9,.2,1), box-shadow 300ms;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.02);
+  background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(0,0,0,0.12));
+  position:relative;
+  overflow:hidden;
+  padding:28px;
+}
+
+/* faces */
+.card__face{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:flex-start;
+  justify-content:center;
+  padding:28px;
+  backface-visibility:hidden;
+  border-radius:18px;
+}
+
+/* front styling */
+.card__face--front{
+  background: linear-gradient(180deg, rgba(14,165,164,0.18), rgba(7,88,90,0.18));
+  backdrop-filter: blur(6px);
+  color:var(--text);
+}
+
+/* back face rotated 180deg */
+.card__face--back{
+  transform: rotateY(180deg) translateZ(1px);
+  background: linear-gradient(180deg,#0b3a3a,#042f2f);
+  color: #dff6f5;
+}
+
+/* simple content */
+h2{font-size:20px;letter-spacing:0.2px;margin-bottom:4px}
+p{opacity:0.95;line-height:1.45}
+.btn{
+  margin-top:14px;
+  border:0;
+  padding:10px 14px;
+  border-radius:10px;
+  background:var(--accent);
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* hover interactivity: tilt and slight rotate to show depth on hover */
+.card-wrap:hover .card{
+  transform: rotateX(6deg) rotateY(-8deg) translateZ(8px);
+  box-shadow: 0 40px 80px rgba(2,6,23,0.6);
+}
+
+/* make it responsive */
+@media (max-width:420px){
+  :root{--size:92vw}
+}
