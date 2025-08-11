@@ -12,8 +12,8 @@ body {
 }
 
 .video-card {
-  width: 640px;
-  height: 360px;
+  width: 800px;
+  height: 500px;
   transform-style: preserve-3d;
   transform: rotateY(15deg) rotateX(5deg);
   transition: transform 0.5s ease;
